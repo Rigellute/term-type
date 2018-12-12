@@ -5,7 +5,7 @@ use std::time::SystemTime;
 
 const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
     abcdefghijklmnopqrstuvwxyz\
-    0123456789)(*&^%$#@!~";
+    0123456789()[]{}*&^%$#@!~";
 
 fn generate_random_word() -> String {
     let mut rng = thread_rng();
