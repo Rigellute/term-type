@@ -9,7 +9,9 @@ cargo run -- --help
 ### TODO
 - [x] Generate random string with real word length (so we can have spaces)
 - [x] Calculate words per minute
-- [ ] Add cli help options
-- [ ] Calculate accuracy of typing (not sure yet)
+- [x] Add cli help options
+- [x] Calculate accuracy of typing
 - [x] Add modes (easy, medium, hard)
-- [ ] Add real word option (could find word file)
+- [x] Add custom text mode through cli
+- [ ] Add real word option
+    1. Could pick random (or in order) lines from a poem.
