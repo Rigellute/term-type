@@ -96,6 +96,23 @@ fn main() {
 
         match now.elapsed() {
             Ok(elapsed) => {
+                let original_text = text.chars().collect::<Vec<char>>();
+                let original_text_length = text.len();
+                let correct_chars = input.chars().enumerate().fold(0.0, |acc, (index, chr)| {
+                    if index >= original_text_length {
+                        return acc;
+                    }
+                    if original_text[index] == chr {
+                        acc + 1.0
+                    } else {
+                        acc
+                    }
+                });
+
+                println!(
+                    "Accuracy {}%",
+                    ((correct_chars / original_text_length as f32) * 100.0).floor()
+                );
                 let words_per_min = ((60.0 / elapsed.as_secs() as f64) * 10.0).floor();
                 println!("{} wpm", words_per_min);
             }
