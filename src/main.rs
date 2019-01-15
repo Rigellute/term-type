@@ -13,6 +13,9 @@ const HARD_CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
     abcdefghijklmnopqrstuvwxyz\
     0123456789()[]{}*&^%$#@!~";
 
+const ARG_MODE: &str = "mode";
+const ARG_TEXT: &str = "text";
+
 enum Mode {
     Easy,
     Medium,
@@ -51,15 +54,22 @@ fn main() {
         .author("Alexander Keliris")
         .about("Practice typing within the terminal 🚀")
         .arg(
-            Arg::with_name("mode")
+            Arg::with_name(ARG_MODE)
                 .help("Specify the level of difficulty: <easy | medium | hard>")
                 .takes_value(true)
                 .short("m")
-                .long("mode"),
+                .long(ARG_MODE),
+        )
+        .arg(
+            Arg::with_name(ARG_TEXT)
+                .help("Type with user provided text")
+                .takes_value(true)
+                .short("t")
+                .long(ARG_TEXT),
         )
         .get_matches();
 
-    let mode = match matches.value_of("mode") {
+    let mode = match matches.value_of(ARG_MODE) {
         Some(m) => match m {
             "easy" => Mode::Easy,
             "medium" => Mode::Medium,
@@ -71,8 +81,12 @@ fn main() {
 
     loop {
         let rand_string = generate_sentence(&mode);
+        let text = match matches.value_of(ARG_TEXT) {
+            Some(t) => t.to_string(),
+            None => rand_string,
+        };
 
-        println!("{}", rand_string);
+        println!("{}", text);
         stdout().flush().unwrap();
 
         let now = SystemTime::now();
